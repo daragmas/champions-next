@@ -6,14 +6,18 @@ import NavBar from '../components/NavBar'
 
 
 export default function Home() {
-  const { user, error, isLoading } = useUser();
+  const { error, isLoading } = useUser();
 
   if (isLoading) return <h1>Loading...</h1>
   if (error) return (<div><h1>An Error Occured</h1><p>{error.message}</p></div>)
 
   return (
     <>
-      <NavBar user={user} />
+      <Head>
+        <title>Home</title>
+      </Head>
+      <NavBar />
+      <h1>Look at this awesome homepage! {':)'}</h1>
     </>
   )
 }

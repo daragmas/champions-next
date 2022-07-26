@@ -1,20 +1,24 @@
 import Link from 'next/link'
+import { useUser } from '@auth0/nextjs-auth0'
 
-export default function NavBar({user}){
+export default function NavBar() {
+    const { user, error, isLoading } = useUser();
 
-    const login_logout = user ? 
-        <a href='/api/auth/logout'>Logout</a> : 
-        <a href='/api/auth/login'>Login</a>
+    console.log(user)
     
-    const characters = user?
-        <a href='./users/testpage'>testpage</a>:
+    const login_logout = user ?
+        <a href='/api/auth/logout'> Logout </a> :
+        <a href='/api/auth/login'> Login </a>
+
+    const characters = user ?
+        <a href='http://localhost:3000/users/characters'> Characters </a> :
         null
-    
-    return(
+
+    return (
         <div className='navbar'>
-            <Link href='http://localhost:3000/'><a><h3>Home</h3></a></Link>
-            {login_logout}
+            <Link href='http://localhost:3000/'><h3> Home </h3></Link>
             {characters}
+            {login_logout}
         </div>
     )
 }
